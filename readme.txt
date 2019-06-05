@@ -1,26 +1,3 @@
-The main interfaces are Storage, Document, Change, Edit. And there is a enum Operation.
-The `storage` is just a `document` repository.
-The `document` contains text. As well as the current version and a list of all changes since creation.
-The `change` is a user action that has already been processed by the server.
-The `edit` is a user action from a user local version of document that is not processed yet.
-The `operation` is an user action: insertion or deletion.
-
-A user working with the document syncing with the server.
-To get the update, the user doesn't have to download the entire document, he has to request only the latest changes from the server.
-When editing, the user sending an `edit` to the server from the user local version of the document,
-and in response he receives a list of document `changes`, including the result of the merge.
-
-Merge rules.
-When the user inserting characters, he should see all that characters in a result text.
-When the user deleting characters, he deleting characters only in the local version of the document.
-If two users delete the same characters, server should not delete them twice.
-
-Merge logic.
-Main logic in the function model.Processor::processEdit.
-1. Synchronize on the document to eliminate the parallel merge.
-2. Get the list of `changes` from the user local version of the document.
-3. Transform user `edit` according to the list of `changes`.
-
 The main interfaces are Storage, Document, Change, Edit. And there is an enum Operation.
 
 The `storage` is just a document repository.
